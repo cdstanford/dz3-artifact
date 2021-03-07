@@ -136,7 +136,10 @@ INFO:root:
 INFO:root:Results successfully saved to results/20210306_231158_boolean_and_loops_summary.txt and results/20210306_231158_boolean_and_loops_raw.csv.
 ```
 
-If that works, you can run the following full experiment, which should take no more than `10` minutes. Run `./run_all.py dz3 cvc4 z3str3 z3trau ostrich z3 -i ../benchmarks/suite_tiny/handwritten -t 10`. You will get one warning which can safely be ignored (`WARNING:root:Solver ostrich: 'randomize=true' ignored because solver does not support random seeds`).
+**Java Check:** Please also run the following test with the `ostrich` solver, since this will make sure there are no problems with the `java` installation: `./run_all.py ostrich -i ../benchmarks/suite_tiny/handwritten/boolean_and_loops/ -t 5`.
+As long as Ostrich is reporting some `sat` and `unsat` answers (not all `crash`), everything should be good.
+
+If all of this works, you can run the following full experiment, which should take no more than `10` minutes. Run `./run_all.py dz3 cvc4 z3str3 z3trau ostrich z3 -i ../benchmarks/suite_tiny/handwritten -t 10`. You will get one warning which can safely be ignored (`WARNING:root:Solver ostrich: 'randomize=true' ignored because solver does not support random seeds`).
 Verify that the output is roughly similar to the following.
 ```
 INFO:root:========== run_all.py: Summary ==========
@@ -182,7 +185,7 @@ We do not recommend this unless you are familiar with Google spreadsheets and ha
 First make a copy of the spreadsheets to your own Google Drive.
 In each spreadsheet, find the tab(s) with raw CSV data, select-all and delete the data, and paste in the CSV data from the `results/<experiment name>_raw.csv` file that was generated when you ran the relevant experiment.
 This should hopefully cause the plots in the other tab to automatically update.
-**Important Note:** If you choose to access the following link, please ensure that you are doing so from an anonymous browser or incognito window so as not to reveal your identity.
+**Important Note:** If you choose to access the following link, please ensure that you are doing so from an anonymous browser or incognito window so as not to risk revealing your identity.
 [Google Drive Folder Link](https://drive.google.com/drive/folders/1RaMp1nYRfHU9bu9dFHuiidQj1Dv62d5K?usp=sharing)
 
 **Abridged Benchmark Suites:**
@@ -194,7 +197,40 @@ Besides running `../benchmarks/suite_tiny` instead of `../benchmarks/suite_full`
 
 ### Experiment 1
 
-<!-- TODO -->
+The first experiment corresponds to the top 3 groups in Figure 6 (Kaluza, Slog, and Norn).
+To run it, make sure you are still in `/home/experiments`, then run `./experiment_1.sh`.
+This is a wrapper script providing options to `run_all.py`.
+This runs the `suite_small` benchmark set (i.e., after one iteration of thinning the benchmarks).
+On our machine, the script takes **up to 20 minutes** to run.
+If you want to run a shorter version, edit the timeout (see "If you want different options" below) to 5 seconds or 1 seconds.
+
+Once the script completes, run `ls results`: look for the most recently created files (file names are prefixed by date and time) ending in `_kaluza_raw.csv`, `_slog_raw.csv`, and `_Norn_raw.csv`. Run `cat` on one of these files and compare with the Figure 6 table.
+Note that the number of benchmarks is much smaller in each table entry, but the general trend (relative size of benchmarks in each entry) should roughly match up. For example, here is what we get for this table:
+```
+===== Categories =====
+              solver sat unsat other blank unchk unk wrong tmout crash
+     cvc4 (baseline)  77    51     0     0     0   0     0     3     0
+                 dz3  75    51     0     0     0   0     0     5     0
+                  z3  72    51     0     0     0   0     0     8     0
+              z3str3  76    51     0     0     0   0     0     4     0
+              z3trau  73    51     0     0     0   0     0     7     0
+             ostrich  37    49     0     0     0   0     0     1    44
+===== Time Buckets =====
+              solver 0.041 0.12 0.37 1.1 3.3 10.2
+     cvc4 (baseline)   111   14    0   3   0    0
+                 dz3   120    3    0   1   2    0
+                  z3   118    2    0   0   2    1
+              z3str3   109   10    7   1   0    0
+              z3trau    86   14   17   4   2    1
+             ostrich     0    0    0  37  49    0
+```
+
+In the top table, the extra columns `other`, `blank`, `unk` are not reported in the paper figure as they are all zero.
+Notice that the trends in the above table match those in Figure 6:
+The solvers except ostrich solve most of the sat/unsat benchmarks but timeout on a smaller fraction, and ostrich reports an error on some subset of the benchmarks. In the time buckets, cvc4, dz3, and z3 are concentrated in the lowest buckets, whereas z3trau displays some spread of higher times, and ostrich is concentrated in the 0.37 to 1.1 and 1.1 to 3.3 s buckets.
+
+If you want different options, you can modify the script with `nano experiment_1.sh`. In particular, you can decrease the timeout at the top to 5 or 1 second instead of 10; this roughly cuts the time by up to a factor of 2 or a factor of 10, respectively.
+You may modify the script to replace `suite_small` with `suite_full`; this takes up to 12 hours, but can be done in around 1 hour with `TIMEOUT=0.5`.
 
 ### Experiment 2
 

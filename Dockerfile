@@ -9,6 +9,15 @@ RUN apt-get update \
   && ln -s /usr/bin/python3 python \
   && pip3 install --upgrade pip
 
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y curl \
+    wget \
+    openjdk-8-jdk
+
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+
 RUN ["apt-get", "install", "-y", "nano"]
 
 COPY . ./home

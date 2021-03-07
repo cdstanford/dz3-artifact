@@ -3,12 +3,12 @@ set -u
 set -e
 TIMEOUT=10
 # NOTE: may need to replace python3.7 with python3.
-SCRIPT="python3.7 run_all.py"
+SCRIPT="python3 run_all.py"
 SOLVERS="dz3 z3 z3str3 z3trau cvc4"
 BASELINE="ostrich"
 CMD="$SCRIPT $SOLVERS -b $BASELINE -t $TIMEOUT -i"
 PROGRESSFILE="progress.txt"
-BASEFOLDER="../benchmarks/suite_full/boolean/"
+BASEFOLDER="../benchmarks/suite_small/boolean/"
 FOLDERS="nbw_bv8_intersection nbw_bv8_subset QF_SLIA_Norn"
 
 rm $PROGRESSFILE || true

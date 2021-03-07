@@ -3,7 +3,7 @@ set -u
 set -e
 TIMEOUT=10
 # NOTE: may need to replace python3.7 with python3.
-SCRIPT="python3.7 run_all.py"
+SCRIPT="python3 run_all.py"
 SOLVERS="dz3 z3str3 z3trau cvc4 ostrich"
 BASELINE="z3"
 CMD="$SCRIPT $SOLVERS -b $BASELINE -t $TIMEOUT -i"
