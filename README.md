@@ -36,7 +36,7 @@ This artifact supports all of the experimental claims made in the paper. The par
 
 ## Getting Started Guide
 
-<!-- TODO: Instructions to download/open/run the docker container -->
+<!-- TODO Included only in README separate from container: instructions to download/open/run the docker container -->
 
 Once the docker container is running, if you `ls home` you should be able to view the contents of the artifact: this `README.md`, the paper `.pdf` files, as well as the folders mentioned in the overview (`benchmarks`, `code`, `experiments`, and `solvers`) if you would like to poke around.
 
@@ -200,12 +200,12 @@ Besides running `../benchmarks/suite_tiny` instead of `../benchmarks/suite_full`
 The first experiment corresponds to the top 3 groups in Figure 6 (Kaluza, Slog, and Norn).
 To run it, make sure you are still in `/home/experiments`, then run `./experiment_1.sh`.
 This is a wrapper script providing options to `run_all.py`.
-This runs the `suite_small` benchmark set (i.e., after one iteration of thinning the benchmarks).
+This is configured to run the `suite_small` benchmark set (i.e., after one iteration of thinning the benchmarks).
 On our machine, the script takes **up to 20 minutes** to run.
 If you want to run a shorter version, edit the timeout (see "If you want different options" below) to 5 seconds or 1 seconds.
 
 Once the script completes, run `ls results`: look for the most recently created files (file names are prefixed by date and time) ending in `_kaluza_raw.csv`, `_slog_raw.csv`, and `_Norn_raw.csv`. Run `cat` on one of these files and compare with the Figure 6 table.
-Note that the number of benchmarks is much smaller in each table entry, but the general trend (relative size of benchmarks in each entry) should roughly match up. For example, here is what we get for this table:
+Note that because we ran on a thinned benchmark set, the number of benchmarks is much smaller in each table entry, but the general trend (relative size of benchmarks in each entry) should roughly match up. For example, here is what we get for this table:
 ```
 ===== Categories =====
               solver sat unsat other blank unchk unk wrong tmout crash
@@ -231,15 +231,30 @@ The solvers except ostrich solve most of the sat/unsat benchmarks but timeout on
 
 If you want different options, you can modify the script with `nano experiment_1.sh`. In particular, you can decrease the timeout at the top to 5 or 1 second instead of 10; this roughly cuts the time by up to a factor of 2 or a factor of 10, respectively.
 You may modify the script to replace `suite_small` with `suite_full`; this takes up to 12 hours, but can be done in around 1 hour with `TIMEOUT=0.5`.
+With a smaller timout, you should expect to see that the time buckets larger than that timeout in the table change into timeouts, and the number of solved benchmarks (sat or unsat) should decrease correspondingly.
 
 ### Experiment 2
 
-<!-- TODO -->
+The second experiment corresponds to the middle 4 groups in Figure 6 (Norn, SyGuS-qgen, and RegExLib).
+To run it, make sure you are still in `/home/experiments`, then run `./experiment_2.sh`.
+As with experiment 1, this is configured to run the `suite_small` benchmark set (i.e., after one iteration of thinning the benchmarks).
+This script should take **about 30-40 minutes** to run.
+
+There should be four new `_summary.txt` output files in `ls results`. The `RegExLib` benchmarks are named as `nbw_bv8`.
+As with experiment 1, the benchmark thinning results in smaller entries than in Figure 6; please compare to see if the overall trends and relative sizes of the entries are similar.
 
 ### Experiment 3
 
-<!-- TODO -->
+The second experiment corresponds to the bottom group in Figure 6 (Handwritten).
+To run it, make sure you are still in `/home/experiments`, then run `./experiment_3.sh`.
 
+Unlike the first two experiments, there are not as many handwritten experiments. So, the script is configured for the artifact to run all of them (the `suite_full` benchmark set), without thinning.
+However, we configured it with a 5 second timeout, instead of 10 seconds in the paper.
+This script should take **about no more than 20 minutes** to run.
+
+There should be a single new `_handwritten_summary.txt` output file in `ls results`.
+Note that `z3str3` and `z3trau` are missing from this table due to lack of support for certain regex constructs.
+Because of the lack of thinning, this table should be directly comparable to Figure 6 in the paper.
 
 ## Additional Documentation
 
