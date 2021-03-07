@@ -179,7 +179,61 @@ The full benchmark suite is in `../benchmarks/suite_full`, but running all of th
 
 ### Running Your Own Examples
 
-<!-- TODO -->
+If you want to try out the regular expression solver on your own examples, first create a new folder: `mkdir new_examples`, which we will now add `.smt2` files to.
+For the syntax, it may be helpful to copy over and modify an existing handwritten example: `cp ../benchmarks/suite_tiny/handwritten/boolean_and_loops/unsat/inter_mod3_unsat.smt2 new_examples`.
+Then run `nano new_examples/inter_mod3_unsat.smt2`:
+
+```
+(declare-const x String)
+(assert (str.in_re x
+    (re.inter
+        (re.* (str.to_re "aaa"))
+        (re.++ (str.to_re "a") (re.* (str.to_re "aaa")))
+)))
+(check-sat)
+```
+
+The general recipe is as follows. We first declare a string variable with `(declare-const x String)`.
+Then, we assert one or more constraints on the string with `(assert (str.in_re x <REGEX>))`, where `<REGEX>` is a regular expression that we construct, and that may involve various operators, including union, concatenation, star as well as Boolean operations and several others. Above, the regular expression starts out with an intersection, which is denoted `re.inter`.
+The first element of the intersection is a star (repetition) `re.*`, and the second is a concatenation `re.++`. The syntax `str.to_re "a"` is used to make a regular expression from a string, and these are the atomic regular expressions that are combined with the other operators.
+At the end, after one or more `(assert (str.in_re x <REGEX>))` constraints, we write `(check-sat)` to ask the SMT solver whether this system of constraints is satisfiable.
+
+Reading this semantically, in this case we have asserted that the string `x` is in the intersection of two languages, where the first is all strings made up of a sequence of `aaa`s, and the second is all strings made up of `a` followed by a sequence of `aaa`s. That is, `x` must be a string of `a`s where the length is both a multiple of 3 and also one more than a multiple 3.
+Since this is impossible, we should expect a solver to return `unsat`.
+
+To test out the example, we can run `./run_all.py -s dz3 -i new_examples -d`.
+The `-s` indicates we are running in standalone mode, just looking at the output of a single solver.
+The `-d` indicates we are running in debug mode, and is useful for seeing the actual output of dZ3 on each example, rather than just the final result. If you are editing the SMT2 file and make any syntax errors, this will also detect the crash and pause after the output of dZ3 to show the error and allow you to debug the mistake.
+
+You can add other examples to `new_examples`, in which case `./run_all.py -s dz3 -i new_examples -d` will run all of them as in all the previous experiments. You can also try a different solver than `dz3` to see how they compare, or you can use the normal experiment mode `./run_all.py dz3 cvc4 <...> -i new_examples` to compare all the solvers and generate a table.
+
+The following are the SMT2 syntax that are most common in creating regular expression benchmarks:
+
+- `(str.in_re <string> <regex>)`: the top-level constraint that a string matches a given regular expression.
+
+- `(= <regex> <regex>)`: alternative top-level constraint where we assert two regexes are equal, instead of that a string matches a regex.
+
+- `(re.union <regex> <regex>)`: union of two regular expressions.
+
+- `(re.++ <regex> <regex>)`: concatenation of two regular expressions.
+
+- `(re.inter <regex> <regex>)`: intersection of two regular expressions.
+
+- `(re.* <regex>)`: repetition (star) of zero or more matches of a regular expression.
+
+- `(re.comp <regex>)`: complement of a regular expression -- matches all strings which do NOT match `<regex>`.
+
+- `(str.to_re <string>)`: a regular expression formed from a string constant. This is how you create a regular expression from a character, or the epsilon regular expression by specifying the string to be `""`.
+
+- `(re.range <char> <char>)`: instead of specifying a single character you can also specify a character range. For example, `(re.range "a" "z")` matches a character between `a` and `z`.
+
+- `re.all` is the regular expression which matches any string (universal language).
+
+- `re.none` is the regular expression which matches no strings (empty language).
+
+- `re.allchar` is the regular expression matching all single-character strings.
+
+- Finally, `((_ re.^ <lower> <upper>) <regex>)` is a useful construct for creating a star which must match a fixed number of times between the given lower and upper bounds. For example, `((_ re.^ 1 5) (re.range "a" "z"))` matches a string which is between 1 and 5 characters, where each is between `a` and `z`. The upper bound can also be omitted if desired.
 
 ### Extending the Solver
 
