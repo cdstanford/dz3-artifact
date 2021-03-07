@@ -36,9 +36,9 @@ This artifact supports all of the experimental claims made in Section 6 of the p
 
 <!-- TODO: Instructions to download/open/run the docker container -->
 
-Once the docker container is running, if you `ls` inside `/home` you should be able to view the contents of the artifact: this `README.md`, the paper `.pdf` files, as well as the folders mentioned in the overview (`benchmarks`, `code`, `experiments`, and `solvers`) if you would like to poke around.
+Once the docker container is running, if you `ls home` you should be able to view the contents of the artifact: this `README.md`, the paper `.pdf` files, as well as the folders mentioned in the overview (`benchmarks`, `code`, `experiments`, and `solvers`) if you would like to poke around.
 
-To get started, run `cd experiments`, then `./run_all.py --help`. You should see information about the command-line options to run various experiments like the following:
+To get started, run `cd home/experiments`, then `./run_all.py --help`. You should see information about the command-line options to run various experiments like the following:
 
 ```
 $ ./run_all.py --help
@@ -112,8 +112,9 @@ All that the script is doing is running these four SMT solver executables on the
 It is also parsing the output and trying to determine whether each solver's output was correct (sat or unsat matching the correct label), or incorrect in some way (wrong, crash, unknown, timeout).
 
 After all tests are finished, the script will then print a summary including how many benchmarks each solver solved, and how long it took to solve them, in buckets of `< .04`, `< 0.12`, `< .37`, `< 1.1`, `< 3.3`, and `< 10.2`.
-The output should show be similar to the following.
-You will get at least minor variations, particularly in running times close to the bucket boundaries.
+The output should be similar to the following.
+However, please note that you will get at least minor variations, particularly in the time buckets table, due to running times which are close to the bucket boundaries.
+Additional factors are that the solvers are random (initialized with a random seed), and that there is always variation in running time over different runs and on different platforms.
 ```
 INFO:root:========== run_all.py: Summary ==========
 INFO:root:
