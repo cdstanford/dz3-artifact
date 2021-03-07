@@ -20,6 +20,8 @@ Because Z3 is its own open source code base, this artifact does not attempt to b
 
 - Additional documentation about the solver, how to use it, and how to replicate the experiments (this file).
 
+Of these, the main script is `experiments/run_all.py`, which is a command-line tool for comparing a set of SMT solvers on a given directory of benchmark files.
+
 ### Claims Supported
 
 This artifact supports all of the experimental claims made in Section 6 of the paper. Namely:
@@ -32,9 +34,141 @@ This artifact supports all of the experimental claims made in Section 6 of the p
 
 ## Getting Started Guide
 
-<!-- TODO -->
+<!-- TODO: Instructions to download/open/run the docker container -->
+
+Once the docker container is running, if you `ls` inside `/home` you should be able to view the contents of the artifact: this `README.md`, the paper `.pdf` files, as well as the folders mentioned in the overview (`benchmarks`, `code`, `experiments`, and `solvers`) if you would like to poke around.
+
+To get started, run `cd experiments`, then `./run_all.py --help`. You should see information about the command-line options to run various experiments like the following:
+
+```
+$ ./run_all.py --help
+INFO:root:========== run_all.py: Initializing ==========
+usage: run_all.py [-h] -i INPUT_PATH [-s] [-c] [-b SOLVER]
+                  [--opts OPTS] [-t TIMEOUT] [-n NUM_REPETITIONS]
+                  [-r {y,n}] [-l {debug,info,warning,error}] [-d]
+                  [--compare-out]
+                  SOLVER [SOLVER ...]
+
+positional arguments:
+  SOLVER                name of solver or list of solvers to test
+                        (edit solvers.json to make additional solvers
+                        available) -- choices {dz3, z3str3, cvc4,
+                        z3trau, ostrich, z3}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUT_PATH, --input-path INPUT_PATH
+                        file or directory containing testcases or
+                        benchmarks to run, e.g.
+                        '../benchmarks/handwritten' (if a directory,
+                        runs recursively in all subfolders)
+  -s, --standalone      run in standalone mode: test a single solver
+                        implementation for fast/slow output and errors
+  -c, --comparison      run in comparison mode: compare a solver
+                        implementation against a baseline, and report
+                        on regressions or speedups
+  -b SOLVER, --baseline SOLVER
+                        name of baseline solver to test, in addition
+                        to the listed solvers (edit solvers.json to
+                        provide other solvers) (required in comparison
+                        mode) -- choices {dz3, z3str3, cvc4, z3trau,
+                        ostrich, z3}
+  --opts OPTS           additional command line options (separated by
+                        whitespace) to pass to the solver
+                        executable(s)
+  -t TIMEOUT, --timeout TIMEOUT
+                        timeout for each test case
+  -n NUM_REPETITIONS, --num-repetitions NUM_REPETITIONS
+                        number of repetitions for each test case
+  -r {y,n}, --randomize {y,n}
+                        use random seeds to randomize each solver run
+  -l {debug,info,warning,error}, --log-level {debug,info,warning,error}
+                        set logging level (has no effect if --debug is
+                        set)
+  -d, --debug           mode to debug solver output and crashes
+                        (implies '--log-level debug')
+  --compare-out         only in comparison mode, compare the output
+                        files for exact equivalence (has no effect if
+                        -s is set)
+```
+
+To use the script, we supply a list of solver names to compare followed by `-i INPUT_PATH` where `INPUT_PATH` is a directory of `.smt2` benchmarks (SMT benchmarks in the standard `.smt2` format).
+For a quick stress test, try comparing `dz3` against the baseline solvers `cvc4`, `z3str3`, and `z3` on one of the handwritten benchmark folders using a timeout of `5` seconds:
+
+```
+./run_all.py dz3 cvc4 z3str3 z3 -i ../benchmarks/suite_tiny/handwritten/boolean_and_loops/ -t 5
+```
+
+You should first see some logging about how the solvers are configured (`INFO:root:Configured solver implementation: ...`), then a list of the tests as they are being run. Each test prints out the result of each solver on the input test file, for example:
+```
+INFO:root:Results at ../benchmarks/suite_tiny/handwritten/boolean_and_loops/./unsat/nestedloop1_unsat.smt2:
+    dz3: unsat (0.10s)
+    cvc4: unsat (0.02s)
+    z3str3: Crash
+    z3: unsat (0.02s)
+```
+
+All that the script is doing is running these four SMT solver executables on the given input file: if you are curious, you can see what the input file looks like (in SMT syntax) for the above example or any other by running `cat ../benchmarks/suite_tiny/handwritten/boolean_and_loops/./unsat/nestedloop1_unsat.smt2`.
+It is also parsing the output and trying to determine whether each solver's output was correct (sat or unsat matching the correct label), or incorrect in some way (wrong, crash, unknown, timeout).
+
+After all tests are finished, the script will then print a summary including how many benchmarks each solver solved, and how long it took to solve them, in buckets of `< .04`, `< 0.12`, `< .37`, `< 1.1`, `< 3.3`, and `< 10.2`.
+The output should show be similar to the following.
+You will get at least minor variations, particularly in running times close to the bucket boundaries.
+```
+INFO:root:========== run_all.py: Summary ==========
+INFO:root:
+===== Categories =====
+              solver sat unsat other blank unchk unk wrong tmout crash
+                 dz3   3     4     0     0     0   0     0     0     0
+                cvc4   2     3     0     0     0   0     0     0     2
+              z3str3   2     0     0     0     0   0     1     0     4
+                  z3   2     4     0     0     0   0     0     0     1
+===== Time Buckets =====
+              solver 0.041 0.12 0.37 1.1 3.3 10.2
+                 dz3     6    1    0   0   0    0
+                cvc4     5    0    0   0   0    0
+              z3str3     2    0    0   0   0    0
+                  z3     5    0    1   0   0    0
+
+INFO:root:Results successfully saved to results/20210306_231158_boolean_and_loops_summary.txt and results/20210306_231158_boolean_and_loops_raw.csv.
+```
+
+If that works, you can run the following full experiment, which should take no more than `10` minutes. Run `./run_all.py dz3 cvc4 z3str3 z3trau ostrich z3 -i ../benchmarks/suite_tiny/handwritten -t 10`. You will get one warning which can safely be ignored (`WARNING:root:Solver ostrich: 'randomize=true' ignored because solver does not support random seeds`).
+Verify that the output is roughly similar to the following.
+```
+INFO:root:========== run_all.py: Summary ==========
+INFO:root:
+===== Categories =====
+              solver sat unsat other blank unchk unk wrong tmout crash
+                 dz3  12    11     0     0     0   0     0     4     0
+                cvc4   9     6     0     0     0   0     0     8     4
+              z3str3   6     1     0     0     0   0     4     9     7
+              z3trau   1     1     0     0     0   1     2     2    20
+             ostrich  10    11     0     0     0   0     2     3     1
+                  z3   4     8     0     0     0   0     0    13     2
+===== Time Buckets =====
+              solver 0.041 0.12 0.37 1.1 3.3 10.2
+                 dz3    11    5    2   2   2    1
+                cvc4     8    2    1   1   1    2
+              z3str3     4    2    1   0   0    0
+              z3trau     1    1    0   0   0    0
+             ostrich     0    0    0   1  20    0
+                  z3     5    1    0   4   2    0
+
+INFO:root:Results successfully saved to results/20210306_234110_handwritten_summary.txt and results/20210306_234110_handwritten_raw.csv.
+```
+
+The `./run_all.py` command line options are documented in `--help`.
+You are welcome to try different options to the script, for example `-d` to print debug info, `-r n` to not initialize the solvers with random seeds, or `-n 5` to repeat each benchmark 5 times instead of just once.
+
+The rest of this file is structured as follows.
+To validate the experimental results / figures reported in the paper, proceed to "Step-by-Step instructions".
+If you would like to test the solver (and baselines) on some new or modified input files, see "Running your Own Examples" under "Additional Documentation".
 
 ## Step-by-Step Instructions
+
+This section contains instructions to validate the experimental results from the paper.
+The full benchmark suite is in `../benchmarks/suite_full`, but running all of these takes over 24 hours. To give something that can be validated on a more reasonable timeframe, we culled the benchmarks in `../benchmarks/suite_small` and then even further in `../benchmarks/suite_tiny`. A word of warning though: not all benchmark subfolders are culled equally (because some are much larger suites than others). As a result of this and general variation in running time, the results you get should **NOT** exactly match those in the paper. However, you should be able to observe the same general shape and rough trends as reported in the paper.
 
 <!-- TODO -->
 
