@@ -1,6 +1,8 @@
 # dZ3
 
-This is the artifact for the paper: *Symbolic Boolean Derivatives for Efficiently Solving Extended Regular Expression Constraints.* This repository is for the artifact evaluation for PLDI 2021.
+This is the artifact for the paper: *Symbolic Boolean Derivatives for Efficiently Solving Extended Regular Expression Constraints.* This artifact is provided as a Docker container for the artifact evaluation for PLDI 2021.
+
+If convenient, you can also view the artifact files online on GitHub [here](https://github.com/cdstanford/dz3-artifact). The GitHub repository contains everything in the Docker container except the solver binaries, which are too large.
 
 ## Artifact Overview
 
@@ -16,7 +18,7 @@ Because Z3 is its own open source code base, this artifact does not attempt to b
 
 - Scripting that can be used to compare SMT solver outputs on a set of benchmarks, and in particular to generate the experiment results in the paper (`/experiments`).
 
-- A copy of the PLDI paper and supplementary material (`/paper.pdf` and `/paper-appendix.pdf`).
+- A copy of the PLDI paper (submitted version), including the appendix (`/paper.pdf`).
 
 - Additional documentation about the solver, how to use it, and how to replicate the experiments (this file).
 
@@ -24,13 +26,13 @@ Of these, the main script is `experiments/run_all.py`, which is a command-line t
 
 ### Claims Supported
 
-This artifact supports all of the experimental claims made in Section 6 of the paper. Namely:
+This artifact supports all of the experimental claims made in the paper, namely:
 
-- Figure 6 in `paper-appendix.pdf`: the full table of experimental results;
+- Appendix Figure 6, the full table of experimental results.
 
-- Figure 4(a), showing the average time, median time, and number of benchmarks solved for dZ3 and the various baselines; and
+- Section 6 Figure 4(a), showing the average time, median time, and number of benchmarks solved for dZ3 and the various baselines.
 
-- Figure 4(b), showing the cumulative number of benchmarks solved in each amount of time or less.
+- Section 6 Figure 4(b), showing the cumulative number of benchmarks solved in each amount of time or less.
 
 ## Getting Started Guide
 
@@ -169,7 +171,7 @@ If you would like to test the solver (and baselines) on some new or modified inp
 ## Step-by-Step Instructions
 
 This section contains instructions to validate the experimental results from the paper.
-The full benchmark suite is in `../benchmarks/suite_full`, but running all of these takes over 24 hours. To give something that can be validated on a more reasonable timeframe, we culled the benchmarks in `../benchmarks/suite_small` and then even further in `../benchmarks/suite_tiny`. A word of warning though: not all benchmark subfolders are culled equally (because some are much larger suites than others). As a result of this and general variation in running time, the results you get should **NOT** exactly match those in the paper. However, you should be able to observe the same general shape and rough trends as reported in the paper.
+The full benchmark suite is in `../benchmarks/suite_full`, but running all of these takes over 24 hours. To give something that can be validated on a more reasonable timeframe, we sampled a small subset of the benchmarks in `../benchmarks/suite_small`, and then an even smaller subset in `../benchmarks/suite_tiny`. A word of warning though: not all original benchmark subfolders are represented equally (because some were much larger suites than others, they were thinned more aggressively). As a result of this and general variation in running time, the results you get should **not exactly** match those in the paper. However, you should be able to observe the same rough trends as reported in the paper.
 
 <!-- TODO -->
 
