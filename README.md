@@ -26,7 +26,7 @@ Of these, the main script is `experiments/run_all.py`, which is a command-line t
 
 ### Claims Supported
 
-This artifact supports all of the experimental claims made in the paper, namely:
+This artifact supports all of the experimental claims made in the paper. The particular figures are:
 
 - Appendix Figure 6, the full table of experimental results.
 
@@ -40,7 +40,7 @@ This artifact supports all of the experimental claims made in the paper, namely:
 
 Once the docker container is running, if you `ls home` you should be able to view the contents of the artifact: this `README.md`, the paper `.pdf` files, as well as the folders mentioned in the overview (`benchmarks`, `code`, `experiments`, and `solvers`) if you would like to poke around.
 
-To get started, run `cd home/experiments`, then `./run_all.py --help`. You should see information about the command-line options to run various experiments like the following:
+To get started, run `cd home/experiments`, then `./run_all.py --help`. You should see information about the command-line options to run various kinds of experiments:
 
 ```
 $ ./run_all.py --help
@@ -171,9 +171,39 @@ If you would like to test the solver (and baselines) on some new or modified inp
 ## Step-by-Step Instructions
 
 This section contains instructions to validate the experimental results from the paper.
-The full benchmark suite is in `../benchmarks/suite_full`, but running all of these takes over 24 hours. To give something that can be validated on a more reasonable timeframe, we sampled a small subset of the benchmarks in `../benchmarks/suite_small`, and then an even smaller subset in `../benchmarks/suite_tiny`. A word of warning though: not all original benchmark subfolders are represented equally (because some were much larger suites than others, they were thinned more aggressively). As a result of this and general variation in running time, the results you get should **not exactly** match those in the paper. However, you should be able to observe the same rough trends as reported in the paper.
+
+### Caveats
+
+**Generating the Plots:**
+Unfortunately, the Figure 4 plots in the paper were generated with external spreadsheets (Google sheets), and can't be generated using the command-line tool. If the simplest possible evaluation is desired, we recommend that the reader focus on the complete experimental results table in the appendix (Figure 6), rather than on Figure 4. While less visual (and thus a bit more tedious to inspect), this table contains all the same data as in the figures. It has the additional advantage that it includes complete results rather than just summarized, and it is directly comparable with the raw output produced by the command-line tool.
+
+For completeness sake, however, we also provide a link to the Google spreadsheets where generating the plots can be done.
+We do not recommend this unless you are familiar with Google spreadsheets and have a bit more time.
+First make a copy of the spreadsheets to your own Google Drive.
+In each spreadsheet, find the tab(s) with raw CSV data, select-all and delete the data, and paste in the CSV data from the `results/<experiment name>_raw.csv` file that was generated when you ran the relevant experiment.
+This should hopefully cause the plots in the other tab to automatically update.
+**Important Note:** If you choose to access the following link, please ensure that you are doing so from an anonymous browser or incognito window so as not to reveal your identity.
+[Google Drive Folder Link](https://drive.google.com/drive/folders/1RaMp1nYRfHU9bu9dFHuiidQj1Dv62d5K?usp=sharing)
+
+**Abridged Benchmark Suites:**
+The full benchmark suite is in `../benchmarks/suite_full`, but running all of these takes close to 24 hours. To give something that can be validated on a more reasonable timeframe, we sampled a small subset of the benchmarks in `../benchmarks/suite_small`, and then an even smaller subset in `../benchmarks/suite_tiny`. **An additional word of warning:** not all original benchmark subfolders are represented equally (because some were much larger suites than others, they were thinned more aggressively). As a result of this and general variation in running time, the results you get should **not exactly** match those in the paper. However, you should be able to observe the same rough trends as reported in the paper.
+
+**Timeouts:**
+The experiments in the paper were run with a 10 second timeout.
+Besides running `../benchmarks/suite_tiny` instead of `../benchmarks/suite_full`, you may use a smaller timeout (e.g., `-t 1` for 1 second) to get faster results, depending on your preference. We will provide specific estimates for the experiment running times below, so you can judge accordingly.
+
+### Experiment 1
 
 <!-- TODO -->
+
+### Experiment 2
+
+<!-- TODO -->
+
+### Experiment 3
+
+<!-- TODO -->
+
 
 ## Additional Documentation
 
