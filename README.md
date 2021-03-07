@@ -41,12 +41,12 @@ You will need a working installation of [Docker](https://www.docker.com/).
 Run `docker run hello-world` to see if it is working properly.
 You should have a file `dz3.tar` which contains the docker image.
 The file is about 2.7GB, and the md5 checksum is `ba33f408d84ac315b1a6ec5873a838a3`,
-Please load the image with `docker load dz3.tar`.
+Please load the image with `docker load < dz3.tar` (this should take less than 5 minutes).
 You can see all of your images with `docker image ls`; you should
 see one listed as `dz3 dz3`.
 Load the image into an interactive container with `docker run -it dz3:dz3`
 This should bring you into an Ubuntu shell to continue the remainder of the instructions.
-You can quit the shell (and exit the container) with `ctrl-D`.
+You can quit the shell (and exit the container) with `ctrl-D` (or `cmd-D` on mac).
 Outside of this shell, you can see all (past and currently running) containers with `docker ps -a`.
 The `README.md` inside the artifact is identical to this one, except that it does not contain this paragraph.
 
@@ -125,7 +125,7 @@ INFO:root:Results at ../benchmarks/suite_tiny/handwritten/boolean_and_loops/./un
 All that the script is doing is running these four SMT solver executables on the given input file: if you are curious, you can see what the input file looks like (in SMT syntax) for the above example or any other by running `cat ../benchmarks/suite_tiny/handwritten/boolean_and_loops/./unsat/nestedloop1_unsat.smt2`.
 It is also parsing the output and trying to determine whether each solver's output was correct (sat or unsat matching the correct label), or incorrect in some way (wrong, crash, unknown, timeout).
 
-After all tests are finished, the script will then print a summary including how many benchmarks each solver solved, and how long it took to solve them, in buckets of `< .04`, `< 0.12`, `< .37`, `< 1.1`, `< 3.3`, and `< 10.2`.
+After all tests are finished, the script will then print a summary including how many benchmarks each solver solved, and how long it took to solve them, in buckets of `< .04`, `< 0.12`, `< .37`, `< 1.1`, `< 3.3`, and `< 10.2` seconds.
 The output should be similar to the following.
 However, please note that you will get at least minor variations, particularly in the time buckets table, due to running times which are close to the bucket boundaries.
 Additional factors are that the solvers are random (initialized with a random seed), and that there is always variation in running time over different runs and on different platforms.
@@ -148,8 +148,14 @@ INFO:root:
 INFO:root:Results successfully saved to results/20210306_231158_boolean_and_loops_summary.txt and results/20210306_231158_boolean_and_loops_raw.csv.
 ```
 
-**Java Check:** Please also run the following test with the `ostrich` solver, since this will make sure there are no problems with the `java` installation: `./run_all.py ostrich -i ../benchmarks/suite_tiny/handwritten/boolean_and_loops/ -t 5`.
+**Java Check:** Please also run the following test with the `ostrich` solver, since this will make sure there are no problems with the `java` installation: `./run_all.py ostrich -i ../benchmarks/suite_tiny/handwritten/boolean_and_loops/ -r n -t 5`.
 As long as Ostrich is reporting some `sat` and `unsat` answers (not all `crash`), everything should be good.
+Expected output of the first table:
+```
+===== Categories =====
+              solver sat unsat other blank unchk unk wrong tmout crash
+             ostrich   2     3     0     0     0   0     1     0     1
+```
 
 If all of this works, you can run the following full experiment, which should take no more than `10` minutes. Run `./run_all.py dz3 cvc4 z3str3 z3trau ostrich z3 -i ../benchmarks/suite_tiny/handwritten -t 10`. You will get one warning which can safely be ignored (`WARNING:root:Solver ostrich: 'randomize=true' ignored because solver does not support random seeds`).
 Verify that the output is roughly similar to the following.
