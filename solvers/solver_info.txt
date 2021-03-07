@@ -1,0 +1,30 @@
+dZ3
+Version: Z3 master branch from August 13, 2020
+Official Release: regex solver released officially with 4.8.9
+Date: 2020-08-13
+Source: https://github.com/Z3Prover/z3/tree/2c02264a94d2377ebf5f64162813b7e379446619
+Built from source using CMake and Ninja
+
+Z3 and Z3str3
+Version: 4.8.8 (Release)
+Release Date: 2020-05-08
+Source: https://github.com/Z3Prover/z3/releases/tag/z3-4.8.8
+Filename: z3-4.8.8-x64-ubuntu-16.04.zip
+
+CVC4
+Version: 1.8 (Release)
+Release Date: 2020-06-19
+Source: https://cvc4.cs.stanford.edu/downloads/builds/x86_64-linux-opt/
+Filename: cvc4-1.8-x86_64-linux-opt
+
+OSTRICH
+Version: 1.0.1 (Release)
+Release Date: 2020-06-24
+Source: https://github.com/uuverifiers/ostrich/releases/tag/v1.0.1
+Filename: ostrich-bin-1.0.1.zip
+
+Z3-Trau
+Version: 1.1 (Pre-release)
+Release Date: 2020-04-25
+Source: https://github.com/guluchen/z3/releases/tag/1.1
+Filename: z3-1.1.zip

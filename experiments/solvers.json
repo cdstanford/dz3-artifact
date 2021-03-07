@@ -1,0 +1,163 @@
+{
+    "solvers": {
+	"dz3": {
+		"path": "../solvers/dz3/2020-08-13-upstream/z3",
+		"opts": [],
+		"rseed_opt": "smt.random_seed=",
+		"detect_crash_patterns": []
+	},
+	"dz3.v3": {
+		"path": "../solvers/dz3/2020-07-31-upstream/z3",
+		"opts": [],
+		"rseed_opt": "smt.random_seed=",
+		"detect_crash_patterns": []
+	},
+	"dz3.v2": {
+		"path": "../solvers/dz3/2020-07-03-fork/z3",
+		"opts": ["smt.seq.use_derivatives=true"],
+		"rseed_opt": "smt.random_seed=",
+		"detect_crash_patterns": []
+	},
+	"dz3.v1": {
+		"path": "../solvers/dz3/2020-07-03-upstream/z3",
+		"opts": ["smt.seq.use_derivatives=true"],
+		"rseed_opt": "smt.random_seed=",
+		"detect_crash_patterns": []
+	},
+	"z3": {
+		"path": "../solvers/z3/bin/z3",
+		"opts": [],
+		"rseed_opt": "smt.random_seed=",
+		"detect_crash_patterns": []
+	},
+	"z3str3": {
+		"path": "../solvers/z3/bin/z3",
+		"opts": ["smt.string_solver=z3str3"],
+		"rseed_opt": "smt.random_seed=",
+		"detect_crash_patterns": []
+	},
+	"cvc4": {
+		"path": "../solvers/cvc4/cvc4",
+		"opts": ["--incremental", "--strings-exp"],
+		"rseed_opt": "--random-seed=",
+		"detect_crash_patterns": []
+	},
+	"ostrich": {
+		"path": "../solvers/ostrich/release/ostrich",
+		"opts": ["+incremental"],
+		"rseed_opt": null,
+		"detect_crash_patterns": [
+			"\\n\\(error \"",
+			"\\nerror\\n",
+			"\\nWarning: (?!ignoring|assuming -length=on to handle length constraints|assuming that recursive function.*is partial)"
+		]
+	},
+	"z3trau": {
+		"path": "../solvers/trau/build/z3",
+		"opts": ["smt.string_solver=trau"],
+		"rseed_opt": "smt.random_seed=",
+		"detect_crash_patterns": []
+	}
+},
+"input_replacements": [
+	{
+		"applies_to": "ALL",
+		"replace": "(^|\\n)\\(get-model\\)",
+		"with": "\\n;(get-model)"
+	},
+	{
+		"applies_to": "ALL",
+		"replace": "(^|\\n)\\(simplify",
+		"with": "\\n;(simplify"
+	},
+	{
+		"applies_to": "ostrich",
+		"replace": "\\((push|pop)\\)",
+		"with": "(\\1 1)"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau", "ostrich"],
+		"replace": "str\\.(to|in)_re",
+		"with": "str.\\1.re"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau"],
+		"replace": "str\\.to_int",
+		"with": "str.to.int"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau"],
+		"replace": "str\\.from_int",
+		"with": "int.to.str"
+	},
+	{
+		"applies_to": ["cvc4"],
+		"replace": "str\\.(to|in)\\.re",
+		"with": "str.\\1_re"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau"],
+		"replace": "re\\.none",
+		"with": "re.empty"
+	},
+	{
+		"applies_to": ["cvc4", "ostrich"],
+		"replace": "re\\.empty",
+		"with": "re.none"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau"],
+		"replace": "re\\.\\^",
+		"with": "re.loop"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau"],
+		"replace": "re\\.comp",
+		"with": "re.complement"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau"],
+		"replace": "\\(_ char #x([0-9A-Fa-f])\\)",
+		"with": "(seq.unit #x0\\1)"
+	},
+	{
+		"applies_to": ["z3", "z3str3", "z3trau"],
+		"replace": "\\(_ char #x([0-9A-Fa-f]{2})\\)",
+		"with": "(seq.unit #x\\1)"
+	},
+	{
+	    "applies_to": ["ostrich"],
+	    "replace": "\\(_ char #x([0-9A-Fa-f]{1,2})\\)",
+	    "with": "\"\\\\u{\\1}\""
+	},
+	{
+		"applies_to": ["cvc4"],
+		"replace": "\"\\\\x([0-9A-Fa-f]{2})\"",
+		"with": "\"\\\\u{\\1}\""
+	},
+	{
+		"applies_to": ["cvc4"],
+		"replace": "^(?![\\s\\S]*\\(set-logic)",
+		"with": "(set-logic ALL)\n"
+	},
+	{
+		"applies_to": ["cvc4"],
+		"replace": "\\(set-logic QF_BVRE\\)",
+		"with": "(set-logic QF_S)"
+	},
+	{
+	    "applies_to": ["ostrich", "cvc4"],
+	    "replace": "\\(RegEx String\\)",
+	    "with": "RegLan"
+	},
+	{
+	    "applies_to": ["ostrich", "cvc4"],
+	    "replace": "seq\\.\\+\\+",
+	    "with": "str.++"
+	}
+],
+"output_pattern": "(?:^|\\n)(sat|unsat|unknown)\\n",
+"default_solver": "dz3",
+"default_baseline": "cvc4",
+"disabled_solvers": ["dz3.v3", "dz3.v2", "dz3.v1"]
+}
