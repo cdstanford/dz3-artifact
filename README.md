@@ -243,6 +243,27 @@ This script should take **about 30-40 minutes** to run.
 There should be four new `_summary.txt` output files in `ls results`. The `RegExLib` benchmarks are named as `nbw_bv8`.
 As with experiment 1, the benchmark thinning results in smaller entries than in Figure 6; please compare to see if the overall trends and relative sizes of the entries are similar.
 
+For a reference example, here is the output we get for `SyGuS-qgen`:
+```
+# cat results/20210307_094512_QF_S_sygus_qgen_summary.txt
+===== Categories =====
+              solver sat unsat other blank unchk unk wrong tmout crash
+     cvc4 (baseline)  28     0     0     0     0   0     0     0     0
+                 dz3  28     0     0     0     0   0     0     0     0
+                  z3   3     0     0     0     0   0     0    25     0
+              z3str3  23     0     0     0     0   0     0     3     2
+              z3trau   8     0     0     0     0   0     0    18     2
+             ostrich   0     0     0     0     0   0     0     0    28
+===== Time Buckets =====
+              solver 0.041 0.12 0.37 1.1 3.3 10.2
+     cvc4 (baseline)     2    2    8   9   5    2
+                 dz3     5   16    7   0   0    0
+                  z3     0    0    0   0   0    3
+              z3str3    23    0    0   0   0    0
+              z3trau     0    0    0   2   1    5
+             ostrich     0    0    0   0   0    0
+```
+
 ### Experiment 3
 
 The second experiment corresponds to the bottom group in Figure 6 (Handwritten).
@@ -250,11 +271,28 @@ To run it, make sure you are still in `/home/experiments`, then run `./experimen
 
 Unlike the first two experiments, there are not as many handwritten experiments. So, the script is configured for the artifact to run all of them (the `suite_full` benchmark set), without thinning.
 However, we configured it with a 5 second timeout, instead of 10 seconds in the paper.
-This script should take **about no more than 20 minutes** to run.
+This script should take **about 15 minutes** to run.
 
 There should be a single new `_handwritten_summary.txt` output file in `ls results`.
 Note that `z3str3` and `z3trau` are missing from this table due to lack of support for certain regex constructs.
 Because of the lack of thinning, this table should be directly comparable to Figure 6 in the paper.
+For reference, here is the output we get on the Docker container:
+```
+===== Categories =====
+              solver sat unsat other blank unchk unk wrong tmout crash
+       z3 (baseline)  14    23     0     0     0   0     2    46     4
+                 dz3  40    37     0     0     0   0     0    12     0
+                cvc4  25    23     0     0     0   0     0    28    13
+             ostrich  40    36     0     0     0   0     5     6     2
+===== Time Buckets =====
+              solver 0.041 0.12 0.37 1.1 3.3 10.2
+       z3 (baseline)    20    4    2   7   2    2
+                 dz3    37   10   11   9   6    4
+                cvc4    26    8    3   2   8    1
+             ostrich     0    0    0  45  31    0
+```
+
+Note: The fact that `z3` is labeled as `baseline` can be ignored here. The baseline is used to determine a correct answer if a benchmark is not labeled, but all of the handwritten benchmarks are labeled.
 
 ## Additional Documentation
 
