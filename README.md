@@ -278,7 +278,7 @@ For a reference example, here is the output we get for `SyGuS-qgen`:
 
 ### Experiment 3
 
-The second experiment corresponds to the bottom group in Figure 6 (Handwritten).
+The third experiment corresponds to the bottom group in Figure 6 (Handwritten).
 To run it, make sure you are still in `/home/experiments`, then run `./experiment_3.sh`.
 
 Unlike the first two experiments, there are not as many handwritten experiments. So, the script is configured for the artifact to run all of them (the `suite_full` benchmark set), without thinning.
