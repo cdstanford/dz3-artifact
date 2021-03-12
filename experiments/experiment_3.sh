@@ -2,7 +2,6 @@
 set -u
 set -e
 TIMEOUT=5
-# NOTE: may need to replace python3.7 with python3.
 SCRIPT="python3 run_all.py"
 SOLVERS="dz3 cvc4 ostrich"
 BASELINE="z3"
