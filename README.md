@@ -39,16 +39,14 @@ This artifact supports all of the experimental claims made in the paper. The par
 **Running the Docker Container:**
 You will need a working installation of [Docker](https://www.docker.com/).
 Run `docker run hello-world` to see if it is working properly.
-You should have a file `dz3.tar` which contains the docker image.
-The file is about 2.7GB, and the md5 checksum is `ba33f408d84ac315b1a6ec5873a838a3`,
-Please load the image with `docker load < dz3.tar` (this should take less than 5 minutes).
+You should have a file `dz3.tar.gz` which contains the docker image.
+Please load the image with `docker load < dz3.tar.gz` (this should take less than 5 minutes).
 You can see all of your images with `docker image ls`; you should
 see one listed as `dz3 dz3`.
 Load the image into an interactive container with `docker run -it dz3:dz3`
 This should bring you into an Ubuntu shell to continue the remainder of the instructions.
 You can quit the shell (and exit the container) with `ctrl-D` (or `cmd-D` on mac).
 Outside of this shell, you can see all (past and currently running) containers with `docker ps -a`.
-The `README.md` inside the artifact is identical to this one, except that it does not contain this paragraph.
 
 Once the docker container is running, if you `ls home` you should be able to view the contents of the artifact: this `README.md`, the paper `.pdf` files, as well as the folders mentioned in the overview (`benchmarks`, `code`, `experiments`, and `solvers`) if you would like to poke around.
 
