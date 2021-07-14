@@ -1,8 +1,9 @@
 # dZ3
 
-This is the artifact for the paper: *Symbolic Boolean Derivatives for Efficiently Solving Extended Regular Expression Constraints.* This artifact is provided as a Docker container for the artifact evaluation for PLDI 2021.
+This GitHub repository mirrors the artifact that was submitted for the PLDI 2021 paper: *Symbolic Boolean Derivatives for Efficiently Solving Extended Regular Expression Constraints.*
+The original artifact was provided as a Docker container for the artifact evaluation for PLDI 2021 [and can be accessed here](https://dl.acm.org/do/10.1145/3410296/full/).
 
-If convenient, you can also view the artifact files online on GitHub [here](https://github.com/cdstanford/dz3-artifact). The GitHub repository contains everything in the Docker container except the solver binaries, which are too large.
+The GitHub repository is almost identical to the artifact, but with one important difference: it does not contain the baseline solver binaries in `/solvers`, because they are too large, and only work on Linux. If you need these, please either use the Docker container above, or obtain the sources for each baseline solver (Z3, CVC4, Ostrich, etc.) from their respective websites and place binaries in `solvers`, and update `experiments/solvers.json` accordingly to point to the solver binaries. Also, the file `/solvers/orig_directory_tree.txt` shows the original directory structure of the solver binaries that we had in our setup, which may aid in reproducing that setup if you don't want to use the Docker container.
 
 ## Artifact Overview
 
@@ -12,7 +13,7 @@ Because Z3 is its own open source code base, this artifact does not attempt to b
 
 - A snapshot of the dZ3 code (i.e. only the files modified for dZ3) at the time that the artifact was built and evaluated (`/code`).
 
-- Executables for dZ3, Z3 and the other SMT solvers that were used as baselines (`/solvers`).
+- Executables for dZ3, Z3 and the other SMT solvers that were used as baselines (`/solvers`). **Important Edit:** the executables are missing in this repository and only in the Docker container, but `orig_directory_tree.txt` shows the original directory structure.
 
 - The suite of SMT benchmarks that were used for evaluation in the paper (`/benchmarks`).
 
