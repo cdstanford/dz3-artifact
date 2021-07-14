@@ -1,0 +1,548 @@
+.
+├── cvc4
+│   ├── cvc4
+│   └── test_input_format
+│       ├── re_equality_minimal.smt2
+│       ├── regex_string_1.smt2
+│       ├── regex_string_1_fix.smt2
+│       ├── regex_string_2.smt2
+│       ├── regex_string_2_fix.smt2
+│       └── seq_pp_fixing.smt2
+├── dz3
+│   ├── 2020-07-03-fork
+│   │   └── z3
+│   ├── 2020-07-03-upstream
+│   │   └── z3
+│   ├── 2020-07-31-upstream
+│   │   └── z3
+│   └── 2020-08-13-upstream
+│       └── z3
+├── norn
+│   ├── examples
+│   │   ├── abcd.smt2
+│   │   ├── horn-ab.smt2
+│   │   ├── reglang-sat.smt2
+│   │   └── reglang.smt2
+│   ├── lib
+│   │   ├── automaton.jar
+│   │   ├── java-cup-11a.jar
+│   │   ├── lazabs.jar
+│   │   ├── logback-classic-1.0.9.jar
+│   │   ├── logback-core-1.0.9.jar
+│   │   ├── org.sat4j.core.jar
+│   │   ├── princess.jar
+│   │   ├── scala-actors.jar
+│   │   ├── scala-library-2.10.4.jar
+│   │   ├── scalatest_2.10-1.9.2.jar
+│   │   ├── slf4j-api-1.7.2.jar
+│   │   └── smt-parser.jar
+│   ├── norn
+│   ├── norn_2.10-1.0.jar
+│   └── test_input_format
+│       └── trying_to_fix.smt2
+├── orig_directory_tree.txt
+├── ostrich
+│   ├── popl2019
+│   │   ├── AUTHORS
+│   │   ├── LICENSE
+│   │   ├── README.md
+│   │   ├── build.sbt
+│   │   ├── lib
+│   │   │   └── automaton.jar
+│   │   ├── ostrich
+│   │   ├── ostrich-client
+│   │   ├── project
+│   │   │   └── assembly.sbt
+│   │   ├── src
+│   │   │   ├── main
+│   │   │   │   └── scala
+│   │   │   │       ├── AFA.scala
+│   │   │   │       ├── AFASolver.scala
+│   │   │   │       ├── AFormula.scala
+│   │   │   │       ├── Emptiness.scala
+│   │   │   │       ├── Flags.scala
+│   │   │   │       ├── PrepropSolver.scala
+│   │   │   │       ├── RRFunsToAFA.scala
+│   │   │   │       ├── Regex2AFA.scala
+│   │   │   │       ├── Replace.scala
+│   │   │   │       ├── ReplaceAll.scala
+│   │   │   │       ├── SMTLIBMain.scala
+│   │   │   │       ├── SMTLIBStringParser.scala
+│   │   │   │       ├── SMTLIBStringTheory.scala
+│   │   │   │       ├── SMTReader.scala
+│   │   │   │       ├── ServerMain.scala
+│   │   │   │       ├── SimpleModelChecker.scala
+│   │   │   │       ├── StringPreprocessing.scala
+│   │   │   │       ├── StringTheory.scala
+│   │   │   │       ├── StringTheoryTranslator.scala
+│   │   │   │       ├── StringTheoryUtil.scala
+│   │   │   │       ├── UserFunctionRegistry.scala
+│   │   │   │       ├── UserFunctions.scala
+│   │   │   │       └── preprop
+│   │   │   │           ├── AutomataAdapters.scala
+│   │   │   │           ├── AutomataUtils.scala
+│   │   │   │           ├── Automaton.scala
+│   │   │   │           ├── BricsAutomaton.scala
+│   │   │   │           ├── BricsTransducer.scala
+│   │   │   │           ├── CaleyGraph.scala
+│   │   │   │           ├── ConcatPreOp.scala
+│   │   │   │           ├── Exploration.scala
+│   │   │   │           ├── PreOp.scala
+│   │   │   │           ├── RRFunsToTransducer.scala
+│   │   │   │           ├── ReplaceAllPreOp.scala
+│   │   │   │           ├── ReplacePreOp.scala
+│   │   │   │           ├── ReversePreOp.scala
+│   │   │   │           ├── Transducer.scala
+│   │   │   │           └── TransducerPreOp.scala
+│   │   │   └── test
+│   │   │       └── scala
+│   │   │           ├── SMTLIBTests.scala
+│   │   │           ├── YanTests.scala
+│   │   │           └── preprop
+│   │   │               ├── BricsTransducerSpecification.scala
+│   │   │               ├── CaleyGraphSpecification.scala
+│   │   │               ├── ConcatPreOpSpecification.scala
+│   │   │               ├── ReplaceAllPreOpSpecification.scala
+│   │   │               └── ReversePreOpSpecification.scala
+│   │   └── tests
+│   │       ├── 1234.corecstrs.readable.smt2
+│   │       ├── concat-regex.smt2
+│   │       ├── concat-regex2.smt2
+│   │       ├── concat-regex3.smt2
+│   │       ├── concat-regex4.smt2
+│   │       ├── concat.smt2
+│   │       ├── concat2.smt2
+│   │       ├── cvc_replace_185.smt2
+│   │       ├── cvc_replace_28.smt2
+│   │       ├── cvc_replace_4062.smt2
+│   │       ├── empty-concat.smt2
+│   │       ├── epsilon-1.smt2
+│   │       ├── epsilon-2.smt2
+│   │       ├── epsilon-3.smt2
+│   │       ├── escapeSequences-1a.smt2
+│   │       ├── escapeSequences-1b.smt2
+│   │       ├── extract-1.smt2
+│   │       ├── extract-1b.smt2
+│   │       ├── extract-1c.smt2
+│   │       ├── membership_427.smt2
+│   │       ├── no-regexes.smt2
+│   │       ├── nonlinear-2.smt2
+│   │       ├── nonlinear.smt2
+│   │       ├── norn-benchmark-9.smt2
+│   │       ├── norn-benchmark-9b.smt2
+│   │       ├── norn-benchmark-9c.smt2
+│   │       ├── norn-benchmark-9d.smt2
+│   │       ├── norn-benchmark-9e.smt2
+│   │       ├── norn-benchmark-9f.smt2
+│   │       ├── norn-benchmark-9g.smt2
+│   │       ├── norn-benchmark-9h.smt2
+│   │       ├── norn-benchmark-9i.smt2
+│   │       ├── norn-benchmark-9j.smt2
+│   │       ├── norn-benchmark-9k.smt2
+│   │       ├── simple-concat-2.smt2
+│   │       ├── simple-concat-3.smt2
+│   │       ├── simple-concat-4.smt2
+│   │       ├── simple-concat-4b.smt2
+│   │       ├── simple-concat-5.smt2
+│   │       ├── simple-concat-5b.smt2
+│   │       ├── simple-concat.smt2
+│   │       ├── simple-cvc-smtlib-b.smt2
+│   │       ├── simple-cvc-smtlib-c.smt2
+│   │       ├── simple-cvc-smtlib.smt2
+│   │       ├── simple-cycle.smt2
+│   │       ├── simple-cycle2.smt2
+│   │       ├── simple-replace-1b.smt2
+│   │       ├── simple-replace-1c.smt2
+│   │       ├── simple-replace-1d.smt2
+│   │       ├── simple-replace-1e.smt2
+│   │       ├── simple-replace-1f.smt2
+│   │       ├── simple-replace-1g.smt2
+│   │       ├── simple-replace-2.smt2
+│   │       ├── simple-replace-2b.smt2
+│   │       ├── simple-replace-2c.smt2
+│   │       ├── simple-replace-2d.smt2
+│   │       ├── simple-replace-3.smt2
+│   │       ├── simple-replace-3b.smt2
+│   │       ├── simple-replace-4.smt2
+│   │       ├── simple-replace-4b.smt2
+│   │       ├── simple-replace-4c.smt2
+│   │       ├── simple-replace-5.smt2
+│   │       ├── simple-replace.smt2
+│   │       ├── test-replace-regex.smt2
+│   │       ├── test-replace-regex2.smt2
+│   │       ├── test-replace-word.smt2
+│   │       ├── test-replace-word2.smt2
+│   │       ├── test-replace.smt2
+│   │       ├── test-replace2.smt2
+│   │       ├── test-replace3.smt2
+│   │       ├── test-replace4.smt2
+│   │       ├── test-reverse.smt2
+│   │       ├── test-reverse2.smt2
+│   │       ├── transducer1.smt2
+│   │       ├── transducer2.smt2
+│   │       ├── transducer2b.smt2
+│   │       ├── transducer2c.smt2
+│   │       ├── transducer2d.smt2
+│   │       ├── transducer3.smt2
+│   │       ├── transducer4.smt2
+│   │       └── yan-benchmarks
+│   │           ├── concat-001.smt2
+│   │           ├── concat-002.smt2
+│   │           ├── concat-003.smt2
+│   │           ├── concat-004-unsat.smt2
+│   │           ├── concat-005-unsat.smt2
+│   │           ├── concat-006.smt2
+│   │           ├── concat-007.smt2
+│   │           ├── concat-008.smt2
+│   │           ├── concat-009.smt2
+│   │           ├── concat-010.smt2
+│   │           ├── equal-001.smt2
+│   │           ├── regex-001.smt2
+│   │           ├── regex-002-unsat.smt2
+│   │           ├── regex-003.smt2
+│   │           ├── regex-004-unsat.smt2
+│   │           ├── regex-005-unsat.smt2
+│   │           ├── regex-006.smt2
+│   │           ├── replaceAll-001.smt2
+│   │           ├── replaceAll-002.smt2
+│   │           ├── replaceAll-003.smt2
+│   │           ├── replaceAll-004.smt2
+│   │           ├── replaceAll-005.smt2
+│   │           ├── replaceAll-006.smt2
+│   │           ├── replaceAll-007.smt2
+│   │           ├── replaceAll-008.smt2
+│   │           ├── replaceAll-009.smt2
+│   │           ├── replaceAll-010.smt2
+│   │           ├── replaceAll-011.smt2
+│   │           ├── replaceAll-012.smt2
+│   │           ├── replaceAll-013.smt2
+│   │           ├── replaceAll-014.smt2
+│   │           ├── replaceAll-015.smt2
+│   │           ├── replaceAll-016.smt2
+│   │           ├── replaceAll-017.smt2
+│   │           ├── replaceAll-018.smt2
+│   │           ├── replaceAll-019.smt2
+│   │           ├── replaceAll-020.smt2
+│   │           ├── replaceAll-021.smt2
+│   │           ├── replaceAll-022.smt2
+│   │           ├── replaceAll-023.smt2
+│   │           ├── replaceAll-024.smt2
+│   │           └── replaceAll-025.smt2
+│   ├── release
+│   │   ├── AUTHORS
+│   │   ├── LICENSE
+│   │   ├── README.md
+│   │   ├── ostrich
+│   │   ├── ostrich-client
+│   │   ├── target
+│   │   │   └── scala-2.11
+│   │   │       └── ostrich-assembly-1.0.jar
+│   │   └── tests
+│   │       ├── 1234.corecstrs.readable.smt2
+│   │       ├── adt.smt2
+│   │       ├── adt2.smt2
+│   │       ├── concat-regex.smt2
+│   │       ├── concat-regex2.smt2
+│   │       ├── concat-regex3.smt2
+│   │       ├── concat-regex4.smt2
+│   │       ├── concat.smt2
+│   │       ├── concat2.smt2
+│   │       ├── cvc_replace_185.smt2
+│   │       ├── cvc_replace_28.smt2
+│   │       ├── cvc_replace_4062.smt2
+│   │       ├── empty-concat.smt2
+│   │       ├── empty-union.smt2
+│   │       ├── epsilon-1.smt2
+│   │       ├── epsilon-2.smt2
+│   │       ├── epsilon-3.smt2
+│   │       ├── escapeSequences-1a.smt2
+│   │       ├── escapeSequences-1b.smt2
+│   │       ├── euf.smt2
+│   │       ├── extract-1.smt2
+│   │       ├── extract-1b.smt2
+│   │       ├── extract-1c.smt2
+│   │       ├── indexof.smt2
+│   │       ├── indexof.smt2~
+│   │       ├── len-bug.smt2
+│   │       ├── loop.smt2
+│   │       ├── loop2.smt2
+│   │       ├── membership_427.smt2
+│   │       ├── no-regexes.smt2
+│   │       ├── nonlinear-2.smt2
+│   │       ├── nonlinear.smt2
+│   │       ├── norn-benchmark-9.smt2
+│   │       ├── norn-benchmark-9b.smt2
+│   │       ├── norn-benchmark-9c.smt2
+│   │       ├── norn-benchmark-9d.smt2
+│   │       ├── norn-benchmark-9e.smt2
+│   │       ├── norn-benchmark-9f.smt2
+│   │       ├── norn-benchmark-9g.smt2
+│   │       ├── norn-benchmark-9h.smt2
+│   │       ├── norn-benchmark-9i.smt2
+│   │       ├── norn-benchmark-9j.smt2
+│   │       ├── norn-benchmark-9k.smt2
+│   │       ├── parse-regex-incremental.smt2
+│   │       ├── parse-regex.smt2
+│   │       ├── parse-regex.smt2~
+│   │       ├── parse-regex2.smt2
+│   │       ├── parse-regex2.smt2~
+│   │       ├── parse-regex2b.smt2
+│   │       ├── parse-regex2b.smt2~
+│   │       ├── parse-regex3.smt2
+│   │       ├── parse-regex3.smt2~
+│   │       ├── parse-regex3b.smt2~
+│   │       ├── parse-regex4.smt2
+│   │       ├── parse-regex4.smt2~
+│   │       ├── prefix.smt2
+│   │       ├── prefix.smt2~
+│   │       ├── prefix2.smt2
+│   │       ├── prefix2.smt2~
+│   │       ├── prefix3.smt2
+│   │       ├── priorityTransducer.smt2~
+│   │       ├── priorityTransducer2.smt2~
+│   │       ├── priorityTransducer3.smt2~
+│   │       ├── priorityTransducer4.smt2~
+│   │       ├── simple-concat-2.smt2
+│   │       ├── simple-concat-3.smt2
+│   │       ├── simple-concat-4.smt2
+│   │       ├── simple-concat-4b.smt2
+│   │       ├── simple-concat-5.smt2
+│   │       ├── simple-concat-5b.smt2
+│   │       ├── simple-concat.smt2
+│   │       ├── simple-cvc-smtlib-b.smt2
+│   │       ├── simple-cvc-smtlib-c.smt2
+│   │       ├── simple-cvc-smtlib.smt2
+│   │       ├── simple-cycle.smt2
+│   │       ├── simple-cycle2.smt2
+│   │       ├── simple-replace-1b.smt2
+│   │       ├── simple-replace-1c.smt2
+│   │       ├── simple-replace-1d.smt2
+│   │       ├── simple-replace-1e.smt2
+│   │       ├── simple-replace-1f.smt2
+│   │       ├── simple-replace-1g.smt2
+│   │       ├── simple-replace-2.smt2
+│   │       ├── simple-replace-2b.smt2
+│   │       ├── simple-replace-2c.smt2
+│   │       ├── simple-replace-2d.smt2
+│   │       ├── simple-replace-3.smt2
+│   │       ├── simple-replace-3b.smt2
+│   │       ├── simple-replace-4.smt2
+│   │       ├── simple-replace-4b.smt2
+│   │       ├── simple-replace-4c.smt2
+│   │       ├── simple-replace-5.smt2
+│   │       ├── simple-replace.smt2
+│   │       ├── substring.smt2
+│   │       ├── substring.smt2~
+│   │       ├── test-replace-regex.smt2
+│   │       ├── test-replace-regex2.smt2
+│   │       ├── test-replace-word.smt2
+│   │       ├── test-replace-word2.smt2
+│   │       ├── test-replace.smt2
+│   │       ├── test-replace2.smt2
+│   │       ├── test-replace3.smt2
+│   │       ├── test-replace4.smt2
+│   │       ├── test-reverse.smt2
+│   │       ├── test-reverse2.smt2
+│   │       ├── transducer1.smt2
+│   │       ├── transducer1b.smt2
+│   │       ├── transducer1c.smt2
+│   │       ├── transducer1c.smt2~
+│   │       ├── transducer2.smt2
+│   │       ├── transducer2b.smt2
+│   │       ├── transducer2c.smt2
+│   │       ├── transducer2d.smt2
+│   │       ├── transducer3.smt2
+│   │       ├── transducer4.smt2
+│   │       └── yan-benchmarks
+│   │           ├── concat-001.smt2
+│   │           ├── concat-002.smt2
+│   │           ├── concat-003.smt2
+│   │           ├── concat-004-unsat.smt2
+│   │           ├── concat-005-unsat.smt2
+│   │           ├── concat-006.smt2
+│   │           ├── concat-007.smt2
+│   │           ├── concat-008.smt2
+│   │           ├── concat-009.smt2
+│   │           ├── concat-010.smt2
+│   │           ├── equal-001.smt2
+│   │           ├── regex-001.smt2
+│   │           ├── regex-002-unsat.smt2
+│   │           ├── regex-003.smt2
+│   │           ├── regex-004-unsat.smt2
+│   │           ├── regex-005-unsat.smt2
+│   │           ├── regex-006.smt2
+│   │           ├── replaceAll-001.smt2
+│   │           ├── replaceAll-002.smt2
+│   │           ├── replaceAll-003.smt2
+│   │           ├── replaceAll-004.smt2
+│   │           ├── replaceAll-005.smt2
+│   │           ├── replaceAll-006.smt2
+│   │           ├── replaceAll-007.smt2
+│   │           ├── replaceAll-008.smt2
+│   │           ├── replaceAll-009.smt2
+│   │           ├── replaceAll-010.smt2
+│   │           ├── replaceAll-011.smt2
+│   │           ├── replaceAll-012.smt2
+│   │           ├── replaceAll-013.smt2
+│   │           ├── replaceAll-014.smt2
+│   │           ├── replaceAll-015.smt2
+│   │           ├── replaceAll-016.smt2
+│   │           ├── replaceAll-017.smt2
+│   │           ├── replaceAll-018.smt2
+│   │           ├── replaceAll-019.smt2
+│   │           ├── replaceAll-020.smt2
+│   │           ├── replaceAll-021.smt2
+│   │           ├── replaceAll-022.smt2
+│   │           ├── replaceAll-023.smt2
+│   │           ├── replaceAll-024.smt2
+│   │           └── replaceAll-025.smt2
+│   └── test_input_format
+│       ├── illegal_regex_exception_2.smt2
+│       ├── illegal_regex_exception_minimal.smt2
+│       ├── inter_wrong_1.smt2
+│       ├── inter_wrong_1_negated.smt2
+│       ├── inter_wrong_2.smt2
+│       ├── inter_wrong_3_silent.smt2
+│       ├── intersect_4_6.smt2
+│       ├── multiple_definitions_minimal.smt2
+│       ├── seq_unit_fixed.smt2
+│       ├── str_replace_minimal.smt2
+│       ├── str_replace_nocrash.smt2
+│       ├── str_to_int.smt2
+│       ├── subset_sat_test.smt2
+│       ├── syntax_error1.smt2
+│       ├── syntax_error2.smt2
+│       ├── syntax_error3.smt2
+│       ├── syntax_error3_fixed.smt2
+│       ├── syntax_error4.smt2
+│       └── syntax_error4_fixed.smt2
+├── sloth
+│   ├── AUTHORS
+│   ├── LICENSE
+│   ├── README.md
+│   ├── runalltests
+│   ├── rundir
+│   ├── sloth
+│   ├── sloth-client
+│   ├── target
+│   │   └── scala-2.11
+│   │       └── sloth-assembly-1.0.jar
+│   ├── test_input_format
+│   │   └── trying_to_fix.smt2
+│   └── tests
+│       ├── Answers
+│       ├── concat.smt2
+│       ├── concat2.smt2
+│       ├── cvc_replace_185.smt2
+│       ├── cvc_replace_28.smt2
+│       ├── cvc_replace_4062.smt2
+│       ├── empty-concat.smt2
+│       ├── epsilon-1.smt2
+│       ├── epsilon-2.smt2
+│       ├── epsilon-3.smt2
+│       ├── escapeSequences-1a.smt2
+│       ├── escapeSequences-1b.smt2
+│       ├── extract-1.smt2
+│       ├── extract-1b.smt2
+│       ├── membership_427.smt2
+│       ├── nonlinear-2.smt2
+│       ├── nonlinear.smt2
+│       ├── norn-benchmark-9.smt2
+│       ├── norn-benchmark-9b.smt2
+│       ├── norn-benchmark-9c.smt2
+│       ├── norn-benchmark-9d.smt2
+│       ├── norn-benchmark-9e.smt2
+│       ├── norn-benchmark-9f.smt2
+│       ├── norn-benchmark-9g.smt2
+│       ├── norn-benchmark-9h.smt2
+│       ├── norn-benchmark-9i.smt2
+│       ├── norn-benchmark-9j.smt2
+│       ├── norn-benchmark-9k.smt2
+│       ├── runtests
+│       ├── simple-concat-2.smt2
+│       ├── simple-concat-3.smt2
+│       ├── simple-concat-4.smt2
+│       ├── simple-concat-4b.smt2
+│       ├── simple-concat-5.smt2
+│       ├── simple-concat-5b.smt2
+│       ├── simple-concat.smt2
+│       ├── simple-cvc-smtlib.smt2
+│       ├── simple-cycle.smt2
+│       ├── simple-cycle2.smt2
+│       ├── simple-replace-1b.smt2
+│       ├── simple-replace-1c.smt2
+│       ├── simple-replace-1d.smt2
+│       ├── simple-replace-1e.smt2
+│       ├── simple-replace-1f.smt2
+│       ├── simple-replace-1g.smt2
+│       ├── simple-replace-2.smt2
+│       ├── simple-replace-2b.smt2
+│       ├── simple-replace-2c.smt2
+│       ├── simple-replace-2d.smt2
+│       ├── simple-replace-3.smt2
+│       ├── simple-replace-3b.smt2
+│       ├── simple-replace-4.smt2
+│       ├── simple-replace-4b.smt2
+│       ├── simple-replace-4c.smt2
+│       ├── simple-replace-5.smt2
+│       ├── simple-replace.smt2
+│       ├── transducer1.smt2
+│       ├── transducer2.smt2
+│       ├── transducer2b.smt2
+│       ├── transducer2c.smt2
+│       ├── transducer2d.smt2
+│       ├── transducer3.smt2
+│       └── transducer4.smt2
+├── trau
+│   └── build
+│       └── z3
+└── z3
+    ├── LICENSE.txt
+    ├── bin
+    │   ├── Microsoft.Z3.deps.json
+    │   ├── Microsoft.Z3.dll
+    │   ├── com.microsoft.z3.jar
+    │   ├── libz3.a
+    │   ├── libz3.so
+    │   ├── libz3java.so
+    │   ├── python
+    │   │   ├── example.py
+    │   │   └── z3
+    │   │       ├── __init__.py
+    │   │       ├── __init__.pyc
+    │   │       ├── z3.py
+    │   │       ├── z3.pyc
+    │   │       ├── z3consts.py
+    │   │       ├── z3consts.pyc
+    │   │       ├── z3core.py
+    │   │       ├── z3core.pyc
+    │   │       ├── z3num.py
+    │   │       ├── z3num.pyc
+    │   │       ├── z3poly.py
+    │   │       ├── z3poly.pyc
+    │   │       ├── z3printer.py
+    │   │       ├── z3printer.pyc
+    │   │       ├── z3rcf.py
+    │   │       ├── z3rcf.pyc
+    │   │       ├── z3types.py
+    │   │       ├── z3types.pyc
+    │   │       ├── z3util.py
+    │   │       └── z3util.pyc
+    │   └── z3
+    └── include
+        ├── z3++.h
+        ├── z3.h
+        ├── z3_algebraic.h
+        ├── z3_api.h
+        ├── z3_ast_containers.h
+        ├── z3_fixedpoint.h
+        ├── z3_fpa.h
+        ├── z3_macros.h
+        ├── z3_optimization.h
+        ├── z3_polynomial.h
+        ├── z3_rcf.h
+        ├── z3_spacer.h
+        ├── z3_v1.h
+        └── z3_version.h
+
+42 directories, 503 files
