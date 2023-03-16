@@ -1,9 +1,14 @@
+# → [Main repository](https://github.com/Z3Prover/z3)
+
+# → [Regex SMT benchmarks](https://github.com/cdstanford/regex-smt-benchmarks)
+
 # dZ3
 
-This GitHub repository mirrors the artifact that was submitted for the PLDI 2021 paper: *Symbolic Boolean Derivatives for Efficiently Solving Extended Regular Expression Constraints.*
-The original artifact was provided as a Docker container for the artifact evaluation for PLDI 2021 [and can be accessed here](https://dl.acm.org/do/10.1145/3410296/full/).
+This repository mirrors the artifact that was submitted for the PLDI 2021 paper: *Symbolic Boolean Derivatives for Efficiently Solving Extended Regular Expression Constraints.*
+**This repository contains experimental scripts and a snapshot of the portion of code that was evaluated for the paper. To use dZ3, install [Z3](https://github.com/Z3Prover/z3). For updated ready-to-use benchmarks, see [regex-smt-benchmarks](https://github.com/cdstanford/regex-smt-benchmarks).**
 
-The GitHub repository is almost identical to the artifact, but with one important difference: it does not contain the baseline solver binaries in `/solvers`, because they are too large, and only work on Linux. If you need these, please either use the Docker container above, or obtain the sources for each baseline solver (Z3, CVC4, Ostrich, etc.) from their respective websites and place binaries in `solvers`, and update `experiments/solvers.json` accordingly to point to the solver binaries. Also, the file `/solvers/orig_directory_tree.txt` shows the original directory structure of the solver binaries that we had in our setup, which may aid in reproducing that setup if you don't want to use the Docker container.
+This artifact was submitted for the PLDI artifact evaluation process and is available [as a self-contained Docker container](https://dl.acm.org/do/10.1145/3410296/full/).
+The GitHub repository is almost identical to the Docker container, but with one important difference: it does not contain the baseline solver binaries in `/solvers`, because they are too large, and only work on Linux. If you need these, please either use the Docker container above, or obtain the sources for each baseline solver (Z3, CVC4, Ostrich, etc.) from their respective websites and place binaries in `solvers`, and update `experiments/solvers.json` accordingly to point to the solver binaries. To help with this process, the file `/solvers/orig_directory_tree.txt` shows the original directory structure of the solver binaries that we had in our setup, which may aid in reproducing that setup if you don't want to use the Docker container.
 
 ## Artifact Overview
 
