@@ -1,4 +1,4 @@
-# → [Main repository](https://github.com/Z3Prover/z3)
+# → [Main Z3 repository](https://github.com/Z3Prover/z3)
 
 # → [Regex SMT benchmarks](https://github.com/cdstanford/regex-smt-benchmarks)
 
